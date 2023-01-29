@@ -70,6 +70,7 @@ contract MultiSig {
     }
 
     function confirmTransaction(uint transactionId) public {
+        console.log(transactionId);
         require(isOwner(), "Only owner can confirm a transaction");
         confirmations[transactionId][msg.sender] = true;
         if (isConfirmed(transactionId)) {
@@ -143,6 +144,21 @@ contract MultiSig {
             owners[i] = owners[i + 1];
         }
         owners.pop();
+    }
+
+    function getTransaction(
+        uint index
+    ) public view returns (Transaction memory) {
+        Transaction memory indexTransaction = transactions[index];
+        return indexTransaction;
+    }
+
+    function getOwner(uint index) public view returns (address) {
+        return owners[index];
+    }
+
+    function getOwnersCount() public view returns (uint) {
+        return owners.length;
     }
 
     modifier onlySelf() {

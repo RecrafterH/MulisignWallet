@@ -115,4 +115,21 @@ describe("unit tests", () => {
       "You don't have the permission to call this transaction!"
     );
   });
+  it("lets approve a transaction in the past", async () => {
+    const [owner, user1, user2, user3, user4] = await ethers.getSigners();
+    await multisigContract
+      .connect(user1)
+      .submitTransaction(user1.address, parseEther("20"), "0x");
+    await multisigContract
+      .connect(user1)
+      .submitTransaction(user4.address, parseEther("120"), "0x");
+    await multisigContract.connect(user2).confirmTransaction(1);
+    console.log("jo");
+    await multisigContract.connect(user2).confirmTransaction(0);
+    let balance = await ethers.provider.getBalance(user1.address);
+    balance = formatEther(balance.toString());
+    console.log(balance.toString());
+    let num = await multisigContract.getConfirmationsCount(0);
+    await expect(num.toString()).to.equal("1");
+  });
 });
