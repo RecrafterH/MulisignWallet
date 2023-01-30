@@ -1,4 +1,4 @@
-export const ADDRESS_MULTISIG = "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853";
+export const ADDRESS_MULTISIG = "0xfdDCCe789cB265b0b54dF1Eb386a8bB87ECaeC62";
 export const ABI_MULTISIG = [
   {
     inputs: [
@@ -27,6 +27,44 @@ export const ABI_MULTISIG = [
       },
     ],
     name: "NewOwnerAdded",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+    ],
+    name: "TransactionConfirmed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "address",
+        name: "destination",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+    ],
+    name: "TransactionSent",
     type: "event",
   },
   {

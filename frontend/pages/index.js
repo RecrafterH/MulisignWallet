@@ -1,6 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import {
   Box,
@@ -19,11 +17,7 @@ import Header from "../components/header";
 import Footer from "@/components/footer";
 import { ADDRESS_MULTISIG, ABI_MULTISIG } from "@/constants/constants";
 import { Contract, ethers } from "ethers";
-import {
-  parseEther,
-  formatEther,
-  getJsonWalletAddress,
-} from "ethers/lib/utils";
+import { parseEther, formatEther } from "ethers/lib/utils";
 import Transaction from "./Transaction";
 import { useState, useEffect, useRef } from "react";
 
@@ -33,6 +27,7 @@ export default function Home() {
   const [latestApprove, setLatestApprove] = useState(true);
   const [searchTransaction, setSearchTransaction] = useState([]);
   const [searchApprove, setSearchApprove] = useState(true);
+
   const ref = useRef(null);
   const ref1 = useRef(null);
   const ref2 = useRef(null);
@@ -67,6 +62,7 @@ export default function Home() {
       await tx.wait();
       ref.current.value = "";
       ref1.current.value = "";
+      getLatestTransaction();
     } catch (error) {
       console.error(error);
     }
@@ -411,7 +407,7 @@ export default function Home() {
             <Box border="1px solid black" borderRadius="8px" padding="20px">
               <Flex justifyContent="center">
                 {latestTransaction.map((transaction) => {
-                  return <Transaction key={transaction.num} {...transaction} />;
+                  return <Transaction key={transaction} {...transaction} />;
                 })}
               </Flex>
             </Box>
@@ -460,7 +456,7 @@ export default function Home() {
               justifyContent="center"
             >
               {searchTransaction.map((transaction) => {
-                return <Transaction key={transaction.num} {...transaction} />;
+                return <Transaction key={transaction} {...transaction} />;
               })}
             </Flex>
             {searchApprove == false ? (
@@ -489,7 +485,9 @@ export default function Home() {
             justifyContent="center"
           >
             {allOwner.map((ownerList) => (
-              <li className={styles.li}>{ownerList}</li>
+              <li key={ownerList} className={styles.li}>
+                {ownerList}
+              </li>
             ))}
             <Button backgroundColor="#b8c3ff" margin="20px" onClick={getOwners}>
               Show Owners
