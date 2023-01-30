@@ -1,4 +1,4 @@
-# ETF-Voting-Contract
+# Multi-Signature-Contract
 
 
 The Multi-Signature-Contract is a Contract to keep your Funds safe. You can deploy a contract and choose the Walletaddresses and the required amount of signers to confirm a transaction from the contract.
