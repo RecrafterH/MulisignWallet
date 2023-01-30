@@ -1,4 +1,4 @@
-export const ADDRESS_MULTISIG = "0xfdDCCe789cB265b0b54dF1Eb386a8bB87ECaeC62";
+export const ADDRESS_MULTISIG = "0x809AB5710e3774B9E1A8Ecc16aA31e6eeb9275f9";
 export const ABI_MULTISIG = [
   {
     inputs: [
